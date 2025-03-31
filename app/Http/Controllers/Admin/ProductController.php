@@ -15,7 +15,7 @@ class ProductController extends Controller
     {
         //
         $products = Product::all();
-        return view("admin.index", compact('products'));
+        return view("product.index", compact('products'));
     }
 
     /**
@@ -24,6 +24,7 @@ class ProductController extends Controller
     public function create()
     {
         //
+        return view("product.create");
     }
 
     /**
@@ -31,7 +32,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+
+        $newProduct = new Product();
+        $newProduct->name = $request->name;
+        $newProduct->description = $request->description;
+        $newProduct->price = $request->price;
+        $newProduct->stock = $request->stock;
+        $newProduct->save();
+
+        return redirect()->route("products.index");
     }
 
     /**
@@ -40,30 +50,42 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //dd($product);
-        return view("admin.show", compact('product'));
+        return view("product.show", compact('product'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
         //
+        return view("product.edit", compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        //dd($request)
+        $data = $request->all();
+
+        $product->name = $data['name'];
+        $product->description = $data['description'];
+        $product->price = $data['price'];
+        $product->stock = $data['stock'];
+        $product->update();
+
+        return redirect()->route("products.index");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
         //
+        $product->delete();
+        return redirect()->route("products.index");
     }
 }
