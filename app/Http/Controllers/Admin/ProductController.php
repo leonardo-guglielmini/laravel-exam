@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -12,6 +14,8 @@ class ProductController extends Controller
     public function index()
     {
         //
+        $products = Product::all();
+        return view("admin.index", compact('products'));
     }
 
     /**
@@ -33,9 +37,10 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Product $product)
     {
-        //
+        //dd($product);
+        return view("admin.show", compact('product'));
     }
 
     /**

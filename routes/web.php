@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Admin\ProductController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,12 +18,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('auth')
-    ->name("admin.")
-    ->prefix("admin")
-    ->group(function () {
-        Route::get('/', [ProductController::class, "index"])->name("index");
-    });
+Route::resource("products", ProductController::class)
+    ->middleware(["auth"]);
 
 
 require __DIR__ . '/auth.php';
