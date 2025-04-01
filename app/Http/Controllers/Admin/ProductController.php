@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
@@ -24,7 +25,8 @@ class ProductController extends Controller
     public function create()
     {
         //
-        return view("product.create");
+        $companies = Company::all();
+        return view("product.create", compact(['companies']));
     }
 
     /**
@@ -33,12 +35,14 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //dd($request);
+        $data = $request->all();
 
         $newProduct = new Product();
-        $newProduct->name = $request->name;
-        $newProduct->description = $request->description;
-        $newProduct->price = $request->price;
-        $newProduct->stock = $request->stock;
+        $newProduct->name = $data['name'];
+        $newProduct->description = $data['description'];
+        $newProduct->price = $data['price'];
+        $newProduct->stock = $data['stock'];
+        $newProduct->company_id = $data['company_id'];
         $newProduct->save();
 
         return redirect()->route("products.index");
@@ -50,6 +54,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //dd($product);
+        //dd($product->company);
         return view("product.show", compact('product'));
     }
 
@@ -59,7 +64,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         //
-        return view("product.edit", compact('product'));
+        $companies = Company::all();
+        return view("product.edit", compact(['companies', 'product']));
     }
 
     /**
@@ -74,6 +80,7 @@ class ProductController extends Controller
         $product->description = $data['description'];
         $product->price = $data['price'];
         $product->stock = $data['stock'];
+        $product->company_id = $data['company_id'];
         $product->update();
 
         return redirect()->route("products.index");

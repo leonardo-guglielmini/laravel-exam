@@ -6,6 +6,6 @@
 
 @section('main')
     @foreach ($products as $product)
-    <h1>{{$product->name}}</h1>    
+    <h1>{{$product->name}}</h1> - {{$product->company->name}}
     @endforeach    
 @endsection
