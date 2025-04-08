@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -34,8 +35,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
         $data = $request->all();
+        //dd($request);
 
         $newProduct = new Product();
         $newProduct->name = $data['name'];
@@ -43,6 +44,11 @@ class ProductController extends Controller
         $newProduct->price = $data['price'];
         $newProduct->stock = $data['stock'];
         $newProduct->company_id = $data['company_id'];
+
+        if (array_key_exists("image", $data)) {
+            $image_url = Storage::putFile("products", $data['image']);
+            $newProduct->image_url = $image_url;
+        }
         $newProduct->save();
 
         return redirect()->route("products.index");
@@ -81,6 +87,16 @@ class ProductController extends Controller
         $product->price = $data['price'];
         $product->stock = $data['stock'];
         $product->company_id = $data['company_id'];
+
+        if (array_key_exists("image", $data)) {
+            if ($product->image_url) {
+                Storage::delete($product->image_url);
+            }
+
+            $image_url = Storage::putFile("products", $data['image']);
+            $product->image_url = $image_url;
+        }
+
         $product->update();
 
         return redirect()->route("products.index");

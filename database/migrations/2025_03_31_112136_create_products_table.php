@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->timestamp("release_date");
+            $table->date("release_date")->default("2000/01/01");
             $table->string("description");
             $table->string("specs");
             $table->integer("stock");
