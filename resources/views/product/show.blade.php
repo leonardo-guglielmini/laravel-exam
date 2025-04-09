@@ -12,7 +12,7 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="flex justify-center items-center">
-                <img src="{{$product->image_url ? asset('storage/' . $product->image_url) : Vite::asset('resources/img/placeholder.png')}}" alt="{{$product->name}}" class="max-w-full">
+                <img src="{{$product->image_url ? asset('storage/' . $product->image_url) : asset('storage/placeholder.png')}}" alt="{{$product->name}}" class="max-w-full">
             </div>
             <div class="flex flex-col justify-start space-y-4">
                 <p class="text-lg text-gray-700 font-semibold">Description:</p>
