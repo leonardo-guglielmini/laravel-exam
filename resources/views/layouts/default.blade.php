@@ -12,6 +12,7 @@
     @include('partials.header')
 
     <main class="flex-grow container mx-auto px-4 py-6">
+        <h1 class="font-bold text-3xl py-5">@yield('page_heading')</h1>
         @yield('main')    
     </main>    
 
