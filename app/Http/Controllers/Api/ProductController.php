@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $data = Product::with('company')->get();
+        $data = Product::with('company', 'tag')->get();
         return response()->json([
             'succces' => true,
             'results' => $data,
