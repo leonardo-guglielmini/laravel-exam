@@ -10,4 +10,8 @@ class Product extends Model
     {
         return $this->belongsTo(Company::class);
     }
+    public function Tag()
+    {
+        return $this->belongsTo(Tag::class);
+    }
 }

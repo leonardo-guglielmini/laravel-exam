@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
@@ -16,6 +17,9 @@ Route::middleware('auth')->group(function () {
 
 Route::resource("products", ProductController::class)
     ->middleware(["auth"])->names('products');
+
+Route::resource("companies", CompanyController::class)
+    ->middleware(["auth"])->names('companies');
 
 
 require __DIR__ . '/auth.php';

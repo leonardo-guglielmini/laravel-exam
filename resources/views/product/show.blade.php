@@ -19,8 +19,16 @@
                 <p class="text-base text-gray-500">{{$product->description}}</p>
 
                 <div class="flex justify-between items-center">
+                    <p class="text-lg text-gray-800 font-semibold">Discount:</p>
+                    <p class="text-xl font-bold">{{$product->tag->name}} | {{$product->tag->price_reduction_percentage}}% OFF</p>
+                </div>
+                <div class="flex justify-between items-center">
                     <p class="text-lg text-gray-800 font-semibold">Price:</p>
                     <p class="text-xl text-green-500 font-bold">${{$product->price}}</p>
+                </div>
+                <div class="flex justify-between items-center">
+                    <p class="text-lg text-gray-800 font-semibold">Discounted Price:</p>
+                    <p class="text-xl text-green-500 font-bold">${{round(($product->price/100) * (100-$product->tag->price_reduction_percentage),2)}}</p>
                 </div>
 
                 <div class="flex justify-between items-center">

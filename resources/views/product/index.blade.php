@@ -24,6 +24,7 @@
             <x-slot:name>{{ $product->name }}</x-slot:name>
             <x-slot:release_date>{{ $product->release_date }}</x-slot:release_date>
             <x-slot:price>{{ $product->price }}</x-slot:price>
+            <x-slot:discounted_price>{{round(($product->price/100) * (100-$product->tag->price_reduction_percentage),2)}}</x-slot:discounted_price>
             <x-slot:stock>{{ $product->stock }}</x-slot:stock>
             <x-slot:id>{{$product->id}}</x-slot:id>
         </x-card>

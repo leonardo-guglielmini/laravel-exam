@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -27,7 +28,8 @@ class ProductController extends Controller
     {
         //
         $companies = Company::all();
-        return view("product.create", compact(['companies']));
+        $tags = Tag::all();
+        return view("product.create", compact(['companies', 'tags']));
     }
 
     /**
@@ -71,7 +73,8 @@ class ProductController extends Controller
     {
         //
         $companies = Company::all();
-        return view("product.edit", compact(['companies', 'product']));
+        $tags = Tag::all();
+        return view("product.edit", compact(['companies', 'product', 'tags']));
     }
 
     /**

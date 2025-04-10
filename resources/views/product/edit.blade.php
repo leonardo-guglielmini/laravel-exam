@@ -30,6 +30,16 @@
                     @endforeach
                 </select>
             </div>
+            <div class="mb-6">
+                <label for="tag_id" class="block text-sm font-semibold text-gray-700">Discount Tag</label>
+                <select name="tag_id" id="tag_id" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500" size="5">
+                    @foreach ($tags as $tag)
+                    <option value="{{ $tag->id }}" {{ $product->tag_id == $tag->id ? 'selected' : '' }}>
+                        {{ $tag->name }}
+                    </option>
+                    @endforeach
+                </select>
+            </div>
             <div class="mb-4">
                 <label for="stock" class="block text-sm font-medium text-gray-700">Stock</label>
                 <input type="number" min="1" max="999" name="stock" id="stock" value="{{ $product->stock }}" class="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500" required>
